@@ -4,8 +4,6 @@ pragma solidity ^0.7.3;
 // Import Ownable from the OpenZeppelin Contracts Library
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-import "./access-control/Auth.sol";
-
 contract Box is Ownable {
   uint256 private value;
 
