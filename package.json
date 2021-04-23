@@ -9,6 +9,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@openzeppelin/contracts": "^4.0.0",
     "hardhat": "^2.2.1"
   }
 }
