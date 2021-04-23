@@ -6,9 +6,17 @@ async function main() {
   await box.deployed()
 
   console.log(`Box deployed to ${box.address}`)
+
+  const storedResult = await box.store(42)
+  console.log(`box.store(42) succeeded!`)
+
+  const retrievedResult = await box.retrieve()
+  console.log(`box.retrieve() succeeded!`)
+
+  console.log(`retrievedResult: ${JSON.stringify(retrievedResult)}`)
 }
 
-main
+main()
   .then(() => process.exit(0))
   .catch(error => {
     console.error(error)
