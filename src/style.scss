@@ -139,9 +139,14 @@ footer {
   }
 }
 
-.notice {
+.notice:not(.visible) {
   visibility: hidden;
 }
+
+.notice a {
+  color: #f0fff2;
+}
+
 .writing-values form:focus-within ~ .notice {
   visibility: visible;
 }
