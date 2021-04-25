@@ -1,13 +1,15 @@
 # Ethereum Box
 This is a simple but test-complete example of an end-to-end Etherum dApp implementation.
 
-In `smart-contracts`, it has a smart contract written in Solidity 0.7.3, which simply holds two values: `publicValue`, which anyone can read and anyone can write, and `restrictedValue`, which anyone can write but only the contract owner can write.
+There is a smart contract `contracts/Box.sol` written in Solidity 0.7.3, which simply holds two values: `publicValue`, which anyone can read and anyone can write, and `restrictedValue`, which anyone can write but only the contract owner can write.
 
-In `website`, it has a React frontend integrated with MetaMask that allows users to read and write to the two values.
+There is a test suite against this smart contract in `test/Box.js`.
 
-It's a simple but comprehensive example of everything you'll need to build on the Ethereum blockchain.
+Finally, there is a HTML, SASS and vanilla JS frontend with MetaMask integration that allows users to read and write to the two values.
 
-The `Box` smart contract comes from excellent [OpenZeppelin's Deveoping Smart Contracts guide](https://docs.openzeppelin.com/learn/developing-smart-contracts).
+It's a simple but comprehensive example of everything you'll need to build a small dApp on the Ethereum blockchain.
+
+The `Box` smart contract comes from excellent [OpenZeppelin's Developing Smart Contracts guide](https://docs.openzeppelin.com/learn/developing-smart-contracts).
 
 ## Get building
 
@@ -17,19 +19,10 @@ The `Box` smart contract comes from excellent [OpenZeppelin's Deveoping Smart Co
 
 ### Setup instructions
 
-First, clone and enter this project.
+1. Clone and enter the project and install dependencies.
   ```sh
   git clone https://github.com/xtyrrell/ethereum-box.git
   cd ethereum-box
-  ```
-
-Then, you'll want to setup the `smart-contracts` project and then the `website` project.
-
-#### `smart-contracts`
-
-1. Move into the `smart-contracts` directory and install its dependencies.
-  ```sh
-  cd smart-contracts
   npm i
   ```
 
@@ -45,17 +38,14 @@ Then, you'll want to setup the `smart-contracts` project and then the `website` 
 
 4. Hack on `Box.sol` or create more contracts!
 
-5. Deploy the contract.
+5. Deploy the contract and set the deployed address in the frontend.
   ```
   npx hardhat run --network localhost scripts/deploy.js
+  # Box deployed to 0x5FbDB2315678afecb367f032d93F642f64180aa3
   ```
+  Set `CONTRACT_ADDRESS` at the top of `src/script.js` to the address just printed.
 
-#### `website`
-
-1. Move into the `website` directory and install its dependencies.
+6. Start the frontend.
   ```sh
-  cd ../website
-  npm i
+  npm start
   ```
-
-2. Run the tests, start the server.
