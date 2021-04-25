@@ -131,7 +131,11 @@ footer {
   }
 
   &.contract-address:empty::before {
-    content: "............................................";
+    content: "..........................................";
+  }
+
+  &.net-type:empty::before {
+    content: "......";
   }
 }
 

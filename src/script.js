@@ -1,8 +1,7 @@
 import { ethers } from "ethers";
 import Box from "./artifacts/contracts/Box.sol/Box.json"
 
-const CONTRACT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-const NETWORK = "http://127.0.0.1:8545";
+const CONTRACT_ADDRESS = "0xbb32B12BE8eAa6d159308386563B6490bb4A5DB0";
 
 // ---
 // utilities
@@ -22,8 +21,9 @@ log("using window.ethereum:", window.ethereum)
 // ---
 
 async function setContractInfoInDom() {
-  document.querySelectorAll(".value.network").forEach(node => node.textContent = NETWORK)
+  document.querySelectorAll(".value.network").forEach(node => node.textContent = "Web3Provider")
   document.querySelectorAll(".value.contract-address").forEach(node => node.textContent = CONTRACT_ADDRESS)
+  document.querySelectorAll(".value.net-type").forEach(node => node.textContent = "Kovan")
 }
 
 async function readValuesIntoDom(readOnlyContract) {
@@ -93,22 +93,21 @@ async function requestSignerAccounts() {
 async function main() {
   // For demonstration of the difference between a provider and a signer, we first read the values from Box using just a
   // provider. This is easier to setup, because you don't need a user to connect with MetaMask or another wallet.
-  const directProvider = new ethers.providers.JsonRpcProvider(NETWORK)
-  
-  const readOnlyContract = new ethers.Contract(CONTRACT_ADDRESS, Box.abi, directProvider)
-
-  await setContractInfoInDom()
-
-  readValuesIntoDom(readOnlyContract)
-
-  document.querySelectorAll('.reload-values').forEach(node => node.addEventListener('click', () => {
-    readValuesIntoDom(readOnlyContract)
-  }))
-
-  // ---
+  // const directProvider = new ethers.providers.JsonRpcProvider(PROVIDER_URL)
   
   const signer = await requestSignerAccounts()
   const contract = new ethers.Contract(CONTRACT_ADDRESS, Box.abi, signer)
+  // const readOnlyContract = new ethers.Contract(CONTRACT_ADDRESS, Box.abi, directProvider)
+
+  await setContractInfoInDom()
+
+  await readValuesIntoDom(contract)
+
+  document.querySelectorAll('.reload-values').forEach(node => node.addEventListener('click', () => {
+    readValuesIntoDom(contract)
+  }))
+
+  // ---
 
   document.querySelector("form.writePublicValue").addEventListener('submit', event => {
     event.preventDefault()
