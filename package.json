@@ -24,14 +24,14 @@
   },
   "homepage": "https://github.com/xtyrrell/ethereum-box#readme",
   "devDependencies": {
-    "@snowpack/plugin-sass": "^1.4.0",
-    "snowpack": "^3.3.5",
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
     "@openzeppelin/contracts": "^3.0.1",
+    "@snowpack/plugin-sass": "^1.4.0",
     "chai": "^4.3.4",
     "ethereum-waffle": "^3.3.0",
-    "hardhat": "^2.2.1"
+    "hardhat": "^2.2.1",
+    "snowpack": "^3.3.5"
   },
   "dependencies": {
     "ethers": "^5.1.3"
