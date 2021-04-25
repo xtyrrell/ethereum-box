@@ -1,0 +1,39 @@
+{
+  "name": "ethereum-box",
+  "version": "1.0.0",
+  "description": "A simple but test-complete example of an end-to-end Etherum dApp implementation.",
+  "scripts": {
+    "test": "hardhat test",
+    "build": "snowpack build",
+    "start": "snowpack dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/xtyrrell/ethereum-box.git"
+  },
+  "keywords": [
+    "solidity",
+    "ethereum",
+    "smart-contract",
+    "dapp"
+  ],
+  "author": "xtyrrell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xtyrrell/ethereum-box/issues"
+  },
+  "homepage": "https://github.com/xtyrrell/ethereum-box#readme",
+  "devDependencies": {
+    "@snowpack/plugin-sass": "^1.4.0",
+    "snowpack": "^3.3.5",
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "@openzeppelin/contracts": "^3.0.1",
+    "chai": "^4.3.4",
+    "ethereum-waffle": "^3.3.0",
+    "hardhat": "^2.2.1"
+  },
+  "dependencies": {
+    "ethers": "^5.1.3"
+  }
+}

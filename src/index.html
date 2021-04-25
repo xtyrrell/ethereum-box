@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css" />
+  <title>The Ethereum Box dApp</title>
+</head>
+<body>
+  <h1>The Ethereum Box dApp 📦</h1>
+  <p>We're interacting live with a contract on the Ethereum blockchain. ⚡🛡️🔗</p>
+  <p>The contract we're connected to has address <span class="value contract-address"></span> on network <span class="value network"></span>.</p>
+
+  <div class="reading-values">
+    <h2>Reading values <button class="reload-values">Reload values</button></h2>
+    <p>In the Ethereum Box <code>Box.sol</code> smart contract, there are two <code>uint256</code> state variables:</p>
+
+    <p>The value of <code>publicValue</code> is <span class="readPublicValue value"></span>.</p>
+    <p>The value of <code>restrictedValue</code> is <span class="readRestrictedValue value"></span>.</p>
+  </div>
+
+  <div class="writing-values">
+    <h2>Writing values</h2>
+    <p>Now, let's try set these values.</p>
+
+    <form class="writePublicValue">
+      <p>The <code>storePublic(uint256 newValue) public</code> function is public and has no access control, so can use any account to set this value.</p>
+      <p>Set value of <code>publicValue</code>: 
+        <input type="text" class="value-input" placeholder="New value" />
+        <input type="submit" value="Set value" />
+      </p>
+    </form>
+    
+    <form class="writeRestrictedValue">
+      <p>The <code>storeRestricted(uint256 newValue) public onlyOwner</code> function is access-restricted, so you'll need to be the contract owner to set this value.</p>
+      <p>Set value of <code>restrictedValue</code>: 
+        <input type="text" class="value-input" placeholder="New value" />
+        <input type="submit" value="Set value" />
+      </p>
+    </form>
+
+    <p class="notice">When you've confirmed the transaction, click Reload Values above to see your changes take effect.</p>
+  </div>
+
+  <footer>
+    <hr />
+
+    <p>Debug information:</p>
+    <pre id="debug"></pre>
+  </footer>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
