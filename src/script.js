@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
+import Box from "./artifacts/contracts/Box.sol/Box.json"
 
-// TODO: Pull this from artifacts. don't hardcode it
 const CONTRACT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 const NETWORK = "http://127.0.0.1:8545";
 
@@ -72,7 +72,7 @@ async function setRestrictedValue(contract) {
 
 async function requestSignerAccounts() {
   // await window.ethereum.enable()
-  await ethereum.send('eth_requestAccounts')
+  await window.ethereum.request({ method: 'eth_requestAccounts' });
 
   // A Web3Provider wraps a standard Web3 provider, which is
   // what Metamask injects as window.ethereum into each page
@@ -86,36 +86,29 @@ async function requestSignerAccounts() {
   return signer
 }
 
-// get a provider/signer
-// connect to contract by giving it an ABI description, address and provider/signer
-// then we can run the contract methods
+// The main flow is:
+// 1. Connect to a wallet (MetaMask) which a user can use to sign transactions.
+// 2. Load our contract. We need to provide the ABI description, contract address, and a signer which can sign transactions.
+// 3. With those two, we now freely interact with our contract.
 async function main() {
+  // For demonstration of the difference between a provider and a signer, we first read the values from Box using just a
+  // provider. This is easier to setup, because you don't need a user to connect with MetaMask or another wallet.
   const directProvider = new ethers.providers.JsonRpcProvider(NETWORK)
-
-  // TODO: Symlink an artifacts to `smart-contracts/artifacts` and use the generated ABI rather than this
-  // hardcoded interface and contract address
-
-  const contractInterface = [
-    'function storePublic(uint256 newValue) public',
-    'function storeRestricted(uint256 newValue) public',
-    'function retrievePublic() public view returns (uint256)',
-    'function retrieveRestricted() public view returns (uint256)'
-  ]
+  
+  const readOnlyContract = new ethers.Contract(CONTRACT_ADDRESS, Box.abi, directProvider)
 
   await setContractInfoInDom()
 
-  const readOnlyContract = new ethers.Contract(CONTRACT_ADDRESS, contractInterface, directProvider)
   readValuesIntoDom(readOnlyContract)
 
   document.querySelectorAll('.reload-values').forEach(node => node.addEventListener('click', () => {
     readValuesIntoDom(readOnlyContract)
   }))
 
-  
   // ---
   
   const signer = await requestSignerAccounts()
-  const contract = new ethers.Contract(CONTRACT_ADDRESS, contractInterface, signer)
+  const contract = new ethers.Contract(CONTRACT_ADDRESS, Box.abi, signer)
 
   document.querySelector("form.writePublicValue").addEventListener('submit', event => {
     event.preventDefault()
@@ -126,17 +119,6 @@ async function main() {
     event.preventDefault()
     setRestrictedValue(contract)
   })
-
-  // try {
-  //   await contract.storePublic(9999)
-  //   log('Successfully ran `contract.storePublic(value)`')
-  // } catch (e) {
-  //   log('Error trying to run `contract.storePublic(value)`')
-  // }
-
-
-  // await contract.storeRestricted(1010101)
 }
-
 
 main()

@@ -5,6 +5,7 @@
 module.exports = {
   mount: {
     "src": "/",
+    "artifacts": "/artifacts"
   },
   plugins: [
     "@snowpack/plugin-sass",
