@@ -1,7 +1,7 @@
 # Ethereum Box
 This is a simple but test-complete example of an end-to-end Etherum dApp implementation.
 
-There is a smart contract `contracts/Box.sol` written in Solidity 0.7.3, which simply holds two values: `publicValue`, which anyone can read and anyone can write, and `restrictedValue`, which anyone can write but only the contract owner can write.
+There is a smart contract `contracts/Box.sol` written in Solidity 0.7.3, which simply holds two values: `publicValue`, which anyone can read and anyone can write, and `restrictedValue`, which anyone can read but only the contract owner can write.
 
 There is a test suite against this smart contract in `test/Box.js`.
 
